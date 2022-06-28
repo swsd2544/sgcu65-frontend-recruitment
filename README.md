@@ -1,4 +1,4 @@
-[Insert Your Name Here]
+ศิริวุฒิ ไสวดี
 
 # SGCU65 Frontend Recruitment
 
@@ -121,7 +121,8 @@
 
 ```
 ## How To Run
-  <วิธีการเปิดเว็บ>
+  yarn install
+  yarn start
 ```
 
 # Applicant Section
