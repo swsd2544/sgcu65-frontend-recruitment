@@ -1,19 +1,37 @@
+import { fetchUsers } from "@/axios";
 import { IUser } from "@/types";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import LoadingSpinner from "../ui/LoadingSpinner";
 import UsersHeader from "./UsersHeader";
 import UsersList from "./UsersList";
 
-interface IProp {
-	users: IUser[];
-}
-
-function UsersContainer({ users }: IProp) {
+function UsersContainer() {
+	const {
+		isLoading,
+		isError,
+		data: users = [],
+		error,
+	} = useQuery<IUser[], Error>("users", fetchUsers);
 	const [searchText, setSearchText] = useState<string>("");
+
+	if (isLoading) {
+		return <LoadingSpinner />;
+	}
+
+	if (isError) {
+		console.log(error);
+		return (
+			<div className="mt-10 flex w-full justify-center">
+				<h1>Failed to fetch users...</h1>
+			</div>
+		);
+	}
 
 	const filteredUsers = users.filter(
 		(user) =>
-			user.firstname.includes(searchText) ||
-			user.lastname.includes(searchText) ||
+			user.name.includes(searchText) ||
+			user.surname.includes(searchText) ||
 			user.username.includes(searchText)
 	);
 
