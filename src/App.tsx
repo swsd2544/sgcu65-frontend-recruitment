@@ -2,8 +2,9 @@ import Layout from "@/layouts/Layout";
 import RegisterContainer from "@/components/register/RegisterContainer";
 import UsersContainer from "./components/users/UsersContainer";
 import { IUser } from "./types";
+import { useState } from "react";
 
-const users: IUser[] = [
+const mockUsers: IUser[] = [
 	{
 		id: 1,
 		firstname: "A",
@@ -49,10 +50,13 @@ const users: IUser[] = [
 ];
 
 function App() {
+	const [register, setRegister] = useState<boolean>(false);
+	const [users, setUsers] = useState<IUser[]>(mockUsers);
+
 	return (
-		<Layout>
-			{/* <RegisterContainer /> */}
-			<UsersContainer users={users} />
+		<Layout showPhoto={!register}>
+			{register && <UsersContainer users={users} />}
+			{!register && <RegisterContainer />}
 		</Layout>
 	);
 }
