@@ -3,6 +3,7 @@ import RegisterContainer from "@/components/register/RegisterContainer";
 import UsersContainer from "./components/users/UsersContainer";
 import { IUser } from "./types";
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
 const mockUsers: IUser[] = [
 	{
@@ -50,14 +51,15 @@ const mockUsers: IUser[] = [
 ];
 
 function App() {
-	const [register, setRegister] = useState<boolean>(false);
 	const [users, setUsers] = useState<IUser[]>(mockUsers);
 
 	return (
-		<Layout showPhoto={!register}>
-			{register && <UsersContainer users={users} />}
-			{!register && <RegisterContainer />}
-		</Layout>
+		<Routes>
+			<Route element={<Layout />}>
+				<Route path="/" element={<UsersContainer users={users} />} />
+				<Route path="/register" element={<RegisterContainer />} />
+			</Route>
+		</Routes>
 	);
 }
 

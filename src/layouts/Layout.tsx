@@ -1,13 +1,12 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import kite from "@/assets/kite.png";
+import { Outlet, useLocation } from "react-router-dom";
 
-interface IProps {
-	showPhoto?: boolean;
-	children?: React.ReactNode | React.ReactNode[];
-}
+function Layout() {
+	const location = useLocation();
+	const showPhoto = location.pathname === "/register";
 
-function Layout({ showPhoto = false, children }: IProps) {
 	return (
 		<div className="flex min-h-screen flex-col">
 			<Navbar />
@@ -19,7 +18,7 @@ function Layout({ showPhoto = false, children }: IProps) {
 						className="absolute top-[7.5%] left-[10%] hidden aspect-square max-h-[92.5%] max-w-[35%] lg:block"
 					/>
 				)}
-				{children}
+				<Outlet />
 			</div>
 		</div>
 	);
