@@ -5,7 +5,7 @@ import SocialButton from "./SocialButton";
 
 function SocialContainer() {
 	return (
-		<div className="flex gap-4">
+		<div className="hidden gap-4 lg:flex">
 			<SocialButton
 				src={igLogo}
 				alt="Instagram logo"

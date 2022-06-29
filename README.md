@@ -79,7 +79,7 @@
   - อีเมลต้องถูกรูปแบบ
   - รหัสผ่านกับยืนยันรหัสผ่านตรงกัน
 - [x] เมื่อกดปุ่ม Submit แล้ว เว็บไซต์จะสามารถเรียก API เพื่อส่งข้อมูลของผู้ใช้ไปให้ Backend
-- [ ] เว็บไซต์สามารถแสดง error จาก API response ได้
+- [x] เว็บไซต์สามารถแสดง error จาก API response ได้
 
 ## Features - หน้ารายชื่อผู้ลงทะเบียน
 
@@ -121,8 +121,7 @@
 
 ```
 ## How To Run
-  yarn install
-  yarn start
+  yarn install && yarn build && yarn preview
 ```
 
 # Applicant Section
