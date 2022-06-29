@@ -70,8 +70,8 @@
 
 อย่าลืม mark ว่าทำ feature ไหนแล้วด้วยการใส่ x ลงใน [ ]
 
-- [ ] เว็บไซต์มีหน้าตาเหมือนกับ UX/UI ที่กำหนดไว้
-- [ ] เว็บไซต์สามารถ Navigate ผู้ใช้ไปยัง Social Media อื่น ๆ ได้เช่น Facebook, Instagram และ Twitter
+- [x] เว็บไซต์มีหน้าตาเหมือนกับ UX/UI ที่กำหนดไว้
+- [x] เว็บไซต์สามารถ Navigate ผู้ใช้ไปยัง Social Media อื่น ๆ ได้เช่น Facebook, Instagram และ Twitter
 - [x] เว็บไซต์สามารถ Responsive ได้ (เว็บใน Mobile และ Desktop ต้องไม่เละ!)
 - [x] เว็บไซต์มีระบบ Form Validation
   - ทุก field ต้องไม่ใช่ string เปล่า
