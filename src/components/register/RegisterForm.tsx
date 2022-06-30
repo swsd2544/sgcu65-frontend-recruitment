@@ -1,14 +1,16 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import TextField from "@/components/ui/TextField";
-import { createUser } from "@/axios";
 import { useMutation } from "react-query";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createUser } from "@/axios";
 import { CreateUserDto } from "@/types";
-import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../ui/LoadingSpinner";
-import FailedRegisterDialog from "./FailedRegisterDialog";
-import { useState } from "react";
+import TextField from "@/components/ui/TextField";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+
+interface IProps {
+	onSuccess: () => void;
+	openModal: () => void;
+}
 
 interface FormData {
 	name: string;
@@ -39,17 +41,13 @@ const schema = yup
 	})
 	.required();
 
-function RegisterForm() {
-	const navigate = useNavigate();
-	const [isOpen, setIsOpen] = useState(false);
+function RegisterForm({ openModal, onSuccess }: IProps) {
 	const createUserMutation = useMutation<void, Error, CreateUserDto>(
 		"users",
 		createUser,
 		{
-			onSuccess: () => navigate(".."),
-			onError: () => {
-				setIsOpen(true);
-			},
+			onSuccess: onSuccess,
+			onError: openModal,
 		}
 	);
 	const {
@@ -70,58 +68,52 @@ function RegisterForm() {
 	);
 
 	return (
-		<>
-			<FailedRegisterDialog
-				isOpen={isOpen}
-				closeModal={() => setIsOpen(false)}
+		<form className="flex flex-col space-y-7" onSubmit={onSubmit}>
+			<TextField
+				{...register("name")}
+				placeholder="ชื่อ"
+				error={errors.name?.message}
 			/>
-			<form className="flex flex-col space-y-7" onSubmit={onSubmit}>
-				<TextField
-					{...register("name")}
-					placeholder="ชื่อ"
-					error={errors.name?.message}
-				/>
-				<TextField
-					{...register("surname")}
-					placeholder="นามสกุล"
-					error={errors.surname?.message}
-				/>
-				<TextField
-					{...register("username")}
-					placeholder="ชื่อผู้ใช้"
-					error={errors.username?.message}
-				/>
-				<TextField
-					{...register("email")}
-					placeholder="อีเมล์"
-					error={errors.email?.message}
-				/>
-				<TextField
-					{...register("password")}
-					placeholder="รหัสผ่าน"
-					error={errors.password?.message}
-					type="password"
-				/>
-				<TextField
-					{...register("confirmPassword")}
-					placeholder="ยืนยันรหัสผ่าน"
-					error={errors.confirmPassword?.message}
-					type="password"
-				/>
-				<button
-					className="rounded bg-primary py-1 text-center text-white"
-					type="submit"
-					disabled={createUserMutation.isLoading}
-				>
-					{createUserMutation.isLoading && (
-						<div className="flex h-4 items-center justify-center">
-							<LoadingSpinner />
-						</div>
-					)}
-					{!createUserMutation.isLoading && "Submit"}
-				</button>
-			</form>
-		</>
+			<TextField
+				{...register("surname")}
+				placeholder="นามสกุล"
+				error={errors.surname?.message}
+			/>
+			<TextField
+				{...register("username")}
+				placeholder="ชื่อผู้ใช้"
+				error={errors.username?.message}
+			/>
+			<TextField
+				{...register("email")}
+				placeholder="อีเมล์"
+				error={errors.email?.message}
+			/>
+			<TextField
+				{...register("password")}
+				placeholder="รหัสผ่าน"
+				error={errors.password?.message}
+				type="password"
+			/>
+			<TextField
+				{...register("confirmPassword")}
+				placeholder="ยืนยันรหัสผ่าน"
+				error={errors.confirmPassword?.message}
+				type="password"
+			/>
+			<button
+				className="rounded bg-primary py-1 text-center text-white disabled:bg-gray"
+				type="submit"
+				disabled={createUserMutation.isLoading}
+			>
+				{createUserMutation.isLoading && (
+					<div className="flex h-4 items-center justify-center">
+						<LoadingSpinner />
+					</div>
+				)}
+				{!createUserMutation.isLoading && "Submit"}
+			</button>
+		</form>
 	);
 }
 
