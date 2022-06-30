@@ -1,12 +1,12 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import kite from "@/assets/kite.png";
-import { Outlet, useLocation } from "react-router-dom";
 
-function Layout() {
-	const location = useLocation();
-	const showPhoto = location.pathname === "/register";
+interface IProps {
+	showPhoto: boolean;
+}
 
+function Layout({ showPhoto }: IProps) {
 	return (
 		<div className="flex min-h-screen flex-col">
 			<Navbar />

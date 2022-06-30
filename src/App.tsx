@@ -1,14 +1,17 @@
 import Layout from "@/layouts/Layout";
-import RegisterContainer from "@/components/register/RegisterContainer";
-import UsersContainer from "./components/users/UsersContainer";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import HomePage from "@/pages/HomePage";
+import RegisterPage from "@/pages/RegisterPage";
 
 function App() {
+	const location = useLocation();
+	const showPhoto = location.pathname === "/register";
+
 	return (
 		<Routes>
-			<Route element={<Layout />}>
-				<Route path="/" element={<UsersContainer />} />
-				<Route path="/register" element={<RegisterContainer />} />
+			<Route element={<Layout showPhoto={showPhoto} />}>
+				<Route path="/" element={<HomePage />} />
+				<Route path="/register" element={<RegisterPage />} />
 			</Route>
 		</Routes>
 	);

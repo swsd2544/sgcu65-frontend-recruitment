@@ -2,12 +2,12 @@ import { fetchUsers } from "@/axios";
 import { IUser } from "@/types";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import FailedFetchUsersDialog from "./FailedFetchUsersDialog";
-import LoadingModal from "./LoadingModal";
-import UsersHeader from "./UsersHeader";
-import UsersList from "./UsersList";
+import FailedFetchUsersDialog from "@/components/users/FailedFetchUsersDialog";
+import LoadingModal from "@/components/users/LoadingModal";
+import UsersHeader from "@/components/users/UsersHeader";
+import UsersList from "@/components/users/UsersList";
 
-function UsersContainer() {
+function HomePage() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [searchText, setSearchText] = useState<string>("");
 	const { isLoading, data: users = [] } = useQuery<IUser[], Error>(
@@ -42,4 +42,4 @@ function UsersContainer() {
 	);
 }
 
-export default UsersContainer;
+export default HomePage;
