@@ -1,4 +1,4 @@
-import logo from "@/assets/sgcu-logo.svg";
+import logo from "@/assets/sgcu-logo.svg"
 
 function Navbar() {
   return (
@@ -8,7 +8,7 @@ function Navbar() {
         <span className="text-2xl text-primary">ISD SGCU</span>
       </div>
     </div>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
