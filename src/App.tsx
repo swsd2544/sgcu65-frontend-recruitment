@@ -1,14 +1,12 @@
 import Layout from "@/layouts/Layout"
-import { Route, Routes, useMatch } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import HomePage from "@/pages/HomePage"
 import RegisterPage from "@/pages/RegisterPage"
 
 function App() {
-  const showPhoto = useMatch({ path: "/register", end: true })
-
   return (
     <Routes>
-      <Route element={<Layout showPhoto={!!showPhoto} />}>
+      <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
