@@ -22,9 +22,9 @@ function HomePage() {
 
   const filteredUsers = users.filter(
     (user) =>
-      user.name.includes(searchText) ||
-      user.surname.includes(searchText) ||
-      user.username.includes(searchText)
+      user.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      user.surname.toLowerCase().includes(searchText.toLowerCase()) ||
+      user.username.toLowerCase().includes(searchText.toLowerCase())
   )
 
   return (
@@ -34,7 +34,7 @@ function HomePage() {
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
       />
-      <div className="mx-auto mt-[3%] flex w-[90%] max-w-6xl flex-col gap-5 lg:gap-12">
+      <div className="mx-auto my-[3%] flex w-[90%] max-w-6xl flex-col gap-5 lg:gap-12">
         <UsersHeader searchText={searchText} setSearchText={setSearchText} />
         {!isLoading && <UsersList users={filteredUsers} />}
       </div>
